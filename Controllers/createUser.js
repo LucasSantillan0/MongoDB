@@ -7,6 +7,7 @@ module.exports = async function createUser(req = request, res = response) {
   try {
     const { google, password, email, ...rest } = req.body;
     const user = new User({ ...rest, email });
+    console.log(rest)
     user.password = bcryptjs.hashSync(password, bcryptjs.genSaltSync());
     await user.save();
     res.json({

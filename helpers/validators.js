@@ -11,7 +11,14 @@ const emailValidator = async (email) => {
     throw new Error (`the mail ${email} already exist`) 
   }
 };
+const idValidator = async (id) => {
+  const idError = await User.findById(id);
+  if (!idError) {
+    throw new Error (`the id "${id}" does not exist`) 
+  }
+};
 module.exports = {
+  idValidator,
   roleValidator,
   emailValidator
 };
