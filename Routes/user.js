@@ -10,6 +10,8 @@ const {
   emailValidator,
   idValidator,
 } = require("../helpers/validators");
+const experimentalRoleValidator = require("../middlewares/roleValidator");
+const adminRoleValidator = require("../middlewares/roleValidator");
 const validateJSW = require("../middlewares/validateJSW");
 const validator = require("../middlewares/validator");
 const Role = require("../Models/Role");
@@ -41,6 +43,7 @@ router.put(
 router.get("/", getUsers);
 router.delete('/:id', [
   validateJSW,
+  experimentalRoleValidator('ADMIN', ),
   check("id").custom(idValidator),
   check("id", "id is not valid").isMongoId(),
 ] ,deleteUser )

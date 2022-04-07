@@ -12,13 +12,13 @@ const validateJSW = async (req = request, res = response, next) => {
   }
   try {
     const { uuid } = jwt.verify(token, process.env.SECRET_KEY);
-    req.uid = uuid;
-    const user = await User.findById(uuid)
-    if(user.role!=='ADMIN'){
-        return res.status(401).json({
-            msg:'unauthorized'
-        })
+    const user = await User.findById(uuid);
+    if (!user || !user.status) {
+      return res.status(401).json({
+        msg: "unauthorized",
+      });
     }
+    req.user=user
     next();
   } catch (e) {
     res.status(401).json({

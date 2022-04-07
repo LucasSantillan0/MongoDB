@@ -21,6 +21,7 @@ module.exports = class Server {
     this.server.use(express.json());
     this.server.use(cors());
     this.server.use(morgan('tiny'))
+    this.server.use(express.static('public'))
   }
   routes() {
     this.server.use("/user", userRouter);
