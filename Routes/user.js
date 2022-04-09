@@ -46,6 +46,7 @@ router.delete('/:id', [
   experimentalRoleValidator('ADMIN', ),
   check("id").custom(idValidator),
   check("id", "id is not valid").isMongoId(),
+  validator
 ] ,deleteUser )
 router.get("*", erorHandler);
 

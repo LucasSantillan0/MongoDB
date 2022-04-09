@@ -5,8 +5,14 @@ const userRouter = require("../Routes/user");
 const dbConection = require("../DB/db");
 const morgan = require("morgan");
 const loginRouter = require("../Routes/login");
+const categoriesRouter = require("../Routes/categories");
 
 module.exports = class Server {
+  paths = {
+    user:'/api/user',
+    login:'/api/login',
+    categories:'/api/categories'
+  }
   constructor() {
     this.server = express();
     this.server.listen(PORT, () =>
@@ -24,9 +30,9 @@ module.exports = class Server {
     this.server.use(express.static('public'))
   }
   routes() {
-    this.server.use("/user", userRouter);
-    this.server.use("/login", loginRouter);
-
+    this.server.use(this.paths.user, userRouter);
+    this.server.use(this.paths.login, loginRouter);
+    this.server.use(this.paths.categories,categoriesRouter)
   }
   async dataBase() {
     await dbConection();

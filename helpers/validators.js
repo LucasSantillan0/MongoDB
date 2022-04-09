@@ -1,3 +1,4 @@
+const Categorie = require("../Models/Categorie");
 const Role = require("../Models/Role");
 const User = require("../Models/User");
 
@@ -17,8 +18,19 @@ const idValidator = async (id) => {
     throw new Error (`the id "${id}" does not exist`) 
   }
 };
+const existCategoryName = async (category) => {
+  const existentCategory = await Categorie.findOne({category:category.toUpperCase()});
+  if (existentCategory) {
+    throw new Error (`the category "${category}" already exist`) 
+  }
+};
+
+
+
 module.exports = {
   idValidator,
   roleValidator,
-  emailValidator
+  emailValidator,
+  existCategoryName,
+  
 };
