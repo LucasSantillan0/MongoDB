@@ -27,7 +27,7 @@
     <script>
       function handleCredentialResponse(response) {
         const body = { id_token: response.credential };
-        fetch("http://localhost:8080/login/google", {
+        fetch("http://localhost:8080/api/login/google", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(body),

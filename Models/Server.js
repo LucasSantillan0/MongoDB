@@ -26,13 +26,13 @@ module.exports = class Server {
   middlewares() {
     this.server.use(express.json());
     this.server.use(cors());
-    this.server.use(morgan('tiny'))
-    this.server.use(express.static('public'))
+    this.server.use(morgan("tiny"));
+    this.server.use(express.static("public"));
   }
   routes() {
     this.server.use(this.paths.user, userRouter);
     this.server.use(this.paths.login, loginRouter);
-    this.server.use(this.paths.categories,categoriesRouter)
+    this.server.use(this.paths.categories, categoriesRouter);
   }
   async dataBase() {
     await dbConection();
