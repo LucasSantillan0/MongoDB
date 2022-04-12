@@ -36,14 +36,10 @@ module.exports = class Server {
   routes() {
     this.server.use(this.paths.user, userRouter);
     this.server.use(this.paths.login, loginRouter);
-<<<<<<< HEAD
     this.server.use(this.paths.categories,categoriesRouter)
     this.server.use(this.paths.products,productRouter)
     this.server.use(this.paths.search,searchRouter)
 
-=======
-    this.server.use(this.paths.categories, categoriesRouter);
->>>>>>> f260b1c0fdfc9bcede269636b5b5c8cd696ad667
   }
   async dataBase() {
     await dbConection();
