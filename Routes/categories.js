@@ -9,7 +9,7 @@ const validateJSW = require("../middlewares/validateJSW");
 const { existCategoryName } = require("../helpers/validators");
 const getCategoryById = require("../controllers/getCategoryById");
 const categoryIdValidator = require("../middlewares/categoryIdValidator");
-
+const experimentalRoleValidator = require("../middlewares/roleValidator");
 const categoriesRouter = Router();
 
 categoriesRouter.get("/", getCategories);
@@ -20,6 +20,7 @@ categoriesRouter.post(
   "/",
   [
     validateJSW,
+    experimentalRoleValidator("ADMIN"),
     check("category").notEmpty(),
     check("status").notEmpty(),
     check("category").custom(existCategoryName),
@@ -30,12 +31,23 @@ categoriesRouter.post(
 
 categoriesRouter.put(
   "/:id",
-  [validateJSW, categoryIdValidator, check("category").notEmpty(), validator],
+  [
+    validateJSW,
+    experimentalRoleValidator("ADMIN"),
+    categoryIdValidator,
+    check("category").notEmpty(),
+    validator,
+  ],
   editCategory
 );
 categoriesRouter.delete(
   "/:id",
-  [validateJSW, categoryIdValidator, validator],
+  [
+    validateJSW,
+    experimentalRoleValidator("ADMIN"),
+    categoryIdValidator,
+    validator,
+  ],
   deleteCategories
 );
 

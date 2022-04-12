@@ -6,12 +6,16 @@ const dbConection = require("../DB/db");
 const morgan = require("morgan");
 const loginRouter = require("../Routes/login");
 const categoriesRouter = require("../Routes/categories");
+const productRouter = require("../Routes/products");
+const searchRouter = require("../Routes/search");
 
 module.exports = class Server {
   paths = {
     user:'/api/user',
     login:'/api/login',
-    categories:'/api/categories'
+    categories:'/api/categories',
+    products:'/api/products',
+    search:'/api/search'
   }
   constructor() {
     this.server = express();
@@ -33,6 +37,9 @@ module.exports = class Server {
     this.server.use(this.paths.user, userRouter);
     this.server.use(this.paths.login, loginRouter);
     this.server.use(this.paths.categories,categoriesRouter)
+    this.server.use(this.paths.products,productRouter)
+    this.server.use(this.paths.search,searchRouter)
+
   }
   async dataBase() {
     await dbConection();

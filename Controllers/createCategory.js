@@ -7,6 +7,7 @@ const createCategory = async (req=request, res=response) => {
     const {category, status} = req.body;
     const newCategory = new Categorie({category:category.toUpperCase(),status,user:req.user._id})
     await newCategory.save()
+    await newCategory.populate('user')
     res.json(newCategory)
 }
 
