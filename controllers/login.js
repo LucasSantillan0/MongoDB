@@ -21,7 +21,7 @@ const login = async (req = request, res = response) => {
       });
     }
     const token = await generateToken(user._id);
-    res.json(token);
+    res.json({token, user});
   } catch (e) {
     console.error(e);
     return res.status(500).json({

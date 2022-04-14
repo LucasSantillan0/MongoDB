@@ -1,2 +1,7 @@
 node_modules/
 .env
+uploads/**.jpg
+uploads/**.png
+uploads/**.jpeg
+uploads/products/**.*
+uploads/users/**.*
